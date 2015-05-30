@@ -1,0 +1,3 @@
+[submodule "OpenROVIMU/RTIMULib"]
+	path = OpenROVIMU/RTIMULib
+	url = https://github.com/richards-tech/RTIMULib.git
