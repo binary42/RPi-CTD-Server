@@ -5,7 +5,7 @@ Temperature, and Depth (CTD) sensor payload for marine deployments.
 Requirements:
 
 Nodejs, npm, node-gyp, C++ Compiler, OpenROV IMU/Depth Sensor,Raspberry Pi,
-Temperature Sensor,Light Sensor
+Temperature Sensor, Light Sensor, Phidgets 8/8/8 Interface
 
 Clone with --recursive to ensure you 'git' all of the required submodules.
 

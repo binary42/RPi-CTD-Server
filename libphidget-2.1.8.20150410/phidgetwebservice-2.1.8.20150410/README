@@ -1,0 +1,50 @@
+                          Phidget Webservice
+                    Version 2.1.8, 22 February 2011
+
+Installation
+============
+
+./configure; make; make install
+
+   This installs the phidgetwebservice21 executable. Avahi zeroconf
+support is compiled in by default and runtime-linked when available.
+	
+Requirements
+============
+
+libphidget21
+
+Options
+=======
+
+   Configure options:
+   
+   To use mdnsresponder instead of avahi for zeroconf:
+   
+     ./configure --enable-zeroconf=bonjour
+	 
+   To disable zeroconf completely:
+   
+     ./configure --disable-zeroconf
+
+Usage
+=====
+
+   'phidgetwebservice21 -h' to see options.
+
+FreeBSD
+=======
+
+   The Webservice has been tested on FreeBSD and found to work.
+However, the configure line must be modified:
+
+     ./configure LIBS=/usr/lib/libphidget21.so CFLAGS=-pthread
+	 
+   This assumes that libphidget21 is installed to its default location
+of /usr/lib. Sometimes, the configure script cannot find libphidget21,
+so we specify it explicitely. We also add the -pthread switch which is
+required by FreeBSD for compiling with threads.
+
+   Building / installation is the same as on Linux:
+   
+     make; make install
