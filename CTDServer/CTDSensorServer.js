@@ -39,18 +39,18 @@
  */
 
 // Includes
-var server = require( 'http' ).createServer( handler );
-var io = require( 'socket.io' )( server );
+var server 				= require( 'http' ).createServer( handler );
+var io 					= require( '/opt/node/lib/node_modules/socket.io' )( server );
 
 // File server
-var fs = require( 'fs' );
+var fs 					= require( 'fs' );
 
 // Phidgets 8/8/8 interface
-var phidgets = require( 'phidgets' );
-var pik = new phidgets.PhidgetInterfaceKit();
+var phidgets 			= require( '/opt/node/lib/node_modules/phidgets' );
+var pik 				= new phidgets.PhidgetInterfaceKit();
 
 // IMU C++ bridge - change as you need
-var imu = require( './build/Release/ImuCppBridge' );
+var imu 				= require( '../ImuCppBridge/build/Release/ImuCppBridge' );
 
 
 // Listen to port - change as you need
