@@ -78,7 +78,7 @@ io.sockets.on('connection', function ( socket )
 {
 	var sensorId = [];
 	
-	console.log('server listening on localhost:8080');
+	console.log('\nServer listening on localhost:8080\n\n');
 
 	pik.open({host: "localhost", port: 8888});
 		
@@ -92,10 +92,6 @@ io.sockets.on('connection', function ( socket )
 		socket.emit( 'values', {'id': data.index, 'value': data.value} );
 	});
 	
-	// Imu testing
-	for( var i = 0; i < 20; ++i)
-	{
-		
-		imu.IMUPoseData();
-	}
+	// Imu testing	
+	imu.IMUPoseData();
 });
