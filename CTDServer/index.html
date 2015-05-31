@@ -52,9 +52,9 @@
  
  socket.on('sensors', function (data) 
  { //append sensors to table
-	var html = '<tr><td>' + 'IMU Pose' + '</td><td id="' + 0 + '"></td></tr>';
+	var html = '<tr><td>' + 'None' + '</td><td id="' + 0 + '"></td></tr>';
 	$('#values').append(html);
-	html = '<tr><td>' + 'IMU Depth' + '</td><td id="' + 1 + '"></td></tr>';
+	html = '<tr><td>' + 'None' + '</td><td id="' + 1 + '"></td></tr>';
 	$('#values').append(html);
 	html = '<tr><td>' + 'Pressure' + '</td><td id="' + 2 + '"></td></tr>';
 	$('#values').append(html);
@@ -67,6 +67,10 @@
 	html = '<tr><td>' + 'None' + '</td><td id="' + 6 + '"></td></tr>';
 	$('#values').append(html);
 	html = '<tr><td>' + 'None' + '</td><td id="' + 7 + '"></td></tr>';
+	$('#values').append(html);
+	html = '<tr><td>' + 'IMU Pose' + '</td><td id="' + 8 + '"></td></tr>';
+	$('#values').append(html);
+	html = '<tr><td>' + 'Depth' + '</td><td id="' + 9 + '"></td></tr>';
 	$('#values').append(html);
 	
  });

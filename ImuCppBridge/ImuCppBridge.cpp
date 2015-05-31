@@ -40,14 +40,13 @@
 
 using namespace v8;
 
-Handle<Value> IMUPoseData( const Arguments &args )
+CIMUInterface 	*interface;
+RTIMU_DATA		data;
+
+Handle<Value> GetIMUPoseData( const Arguments &args )
 {
     HandleScope scope;
     
-    CIMUInterface	*interface = new CIMUInterface();
-    RTIMU_DATA		data;
-    
-    interface->Setup( 0.02, true, true, true );
     data = interface->GetPoseInfo();
 
     return scope.Close( String::New( RTMath::displayDegrees( "Fused Pose in Degrees", data.fusionPose ) ) );
@@ -55,8 +54,12 @@ Handle<Value> IMUPoseData( const Arguments &args )
 
 void init( Handle<Object> exports )
 {
-    exports->Set( String::NewSymbol( "IMUPoseData" ),
-        FunctionTemplate::New( IMUPoseData )->GetFunction() );
+	interface = new CIMUInterface();
+   
+    interface->Setup( 0.02, true, true, true );
+	
+    exports->Set( String::NewSymbol( "GetIMUPoseData" ),
+        FunctionTemplate::New( GetIMUPoseData )->GetFunction() );
 }
 
 NODE_MODULE( ImuCppBridge, init )

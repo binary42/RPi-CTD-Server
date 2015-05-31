@@ -52,7 +52,6 @@ var pik 				= new phidgets.PhidgetInterfaceKit();
 // IMU C++ bridge - change as you need
 var imu 				= require( '../ImuCppBridge/build/Release/ImuCppBridge' );
 
-
 // Listen to port - change as you need
 server.listen(8080);
 
@@ -76,7 +75,9 @@ function handler( req, res )
 // Connection handling - Emit phidgets sensor data to client
 io.sockets.on('connection', function ( socket ) 
 {
-	var sensorId = [];
+	// Interval for IMU reads - value in ms
+	var imuInterval = 25;
+	var imuData;
 	
 	console.log('\nServer listening on localhost:8080\n\n');
 
@@ -84,14 +85,17 @@ io.sockets.on('connection', function ( socket )
 		
 	socket.emit( 'sensors', {'test': 0 } );
 
-			
-	//send temperature reading out to connected clients
+	// Send temperature reading out to connected clients
     pik.on( 'sensor', function( emitter, data )	
-    {
-		//console.log( 'Sensor: ' + data.index + ', value: ' + data.value );
+    {	
 		socket.emit( 'values', {'id': data.index, 'value': data.value} );
 	});
 	
-	// Imu testing	
-	imu.IMUPoseData();
+	setInterval( function()
+	{
+		// Imu Fused Pose Information	
+		imuData = imu.GetIMUPoseData();
+		socket.emit( 'values', {'id': 8, 'value': imuData} );
+	}, imuInterval );
+
 });
