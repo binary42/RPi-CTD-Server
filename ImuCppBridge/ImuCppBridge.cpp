@@ -40,6 +40,7 @@
 
 using namespace v8;
 
+// Globals?..yeah this sucks.
 CIMUInterface 	*interface;
 RTIMU_DATA		data;
 
