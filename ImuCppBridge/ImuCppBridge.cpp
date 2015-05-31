@@ -53,6 +53,17 @@ Handle<Value> GetIMUPoseData( const Arguments &args )
     return scope.Close( String::New( RTMath::displayDegrees( "Fused Pose in Degrees", data.fusionPose ) ) );
 }
 
+Handle<Value> GetIMUDepthData( const Arguments &args )
+{
+	HandleScope scope;
+	
+	data = interface->GetPoseInfo();
+	
+	Local<Number> number = Number::New( RTMath::convertPressureToHeight( data.pressure ) );
+	
+	return scope.Close( number );
+}
+
 void init( Handle<Object> exports )
 {
 	interface = new CIMUInterface();
@@ -61,6 +72,9 @@ void init( Handle<Object> exports )
 	
     exports->Set( String::NewSymbol( "GetIMUPoseData" ),
         FunctionTemplate::New( GetIMUPoseData )->GetFunction() );
+
+    exports->Set( String::NewSymbol( "GetIMUDepthData" ),
+		FunctionTemplate::New( GetIMUDepthData )->GetFunction() );
 }
 
 NODE_MODULE( ImuCppBridge, init )

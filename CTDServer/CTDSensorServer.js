@@ -96,6 +96,10 @@ io.sockets.on('connection', function ( socket )
 		// Imu Fused Pose Information	
 		imuData = imu.GetIMUPoseData();
 		socket.emit( 'values', {'id': 8, 'value': imuData} );
+		
+		imuData = imu.GetIMUDepthData();
+		socket.emit( 'values', {'id': 9, 'value': imuData} );
+		
 	}, imuInterval );
 
 });
