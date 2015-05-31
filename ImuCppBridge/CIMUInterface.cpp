@@ -37,15 +37,19 @@
 
 CIMUInterface::CIMUInterface()
 {
+	// Grabs the .ini file in local directory
 	m_pSettings = new RTIMUSettings( "RTIMULib" );
 	
+	// Create IMU object
 	m_pImu = RTIMU::createIMU( m_pSettings );
 	
+	// 10DOF IMU - pressure sensor addition
 	m_pPressure = RTPressure::createPressure( m_pSettings );
 }
 
 CIMUInterface::~CIMUInterface()
 {
+	// Rid the world of our referenced objects
 	delete( m_pSettings );
 	delete( m_pImu );
 	delete( m_pPressure );
@@ -53,16 +57,20 @@ CIMUInterface::~CIMUInterface()
 
 void CIMUInterface::Setup( float slerPwrIn, bool enableGyro, bool enableAccel, bool enableComp )
 {
+	// Initialize IMU
 	m_pImu->IMUInit();
 	
+	// Set power setting
 	m_pImu->setSlerpPower( slerPwrIn );
 	
+	// Enable the Gyro, Accel and Compass
 	m_pImu->setGyroEnable( enableGyro );
 	
 	m_pImu->setAccelEnable( enableAccel );
 	
 	m_pImu->setCompassEnable( enableComp );
 
+	// If the pressure sensor exists, init it
 	if( m_pPressure != nullptr )
 	{
 		m_pPressure->pressureInit();
@@ -71,6 +79,7 @@ void CIMUInterface::Setup( float slerPwrIn, bool enableGyro, bool enableAccel, b
 
 RTIMU_DATA CIMUInterface::GetPoseInfo()
 {		
+	// Returns the RTIMU_DATA object containg current readings
 	m_imuData = m_pImu->getIMUData();
 	
 	// Add pressure to structure

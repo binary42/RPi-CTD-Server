@@ -45,18 +45,16 @@ class CIMUInterface
 public:
 	CIMUInterface();
 	virtual ~CIMUInterface();
-	
-	// Attributes
-	bool					m_isDone;
-	
-	RTIMUSettings			*m_pSettings;
-	RTIMU					*m_pImu;
-	RTPressure				*m_pPressure;
-	
-	RTIMU_DATA 				m_imuData;
-
+		
 	// Methods
 	void 					Setup( float slerPwrIn, bool enableGyro, bool enableAccel, bool enableComp );
 	RTIMU_DATA 				GetPoseInfo();
-	
+
+private:
+	// Attributes	
+	RTIMUSettings			*m_pSettings;
+	RTIMU					*m_pImu;
+	RTPressure				*m_pPressure;
+	RTIMU_DATA 				m_imuData;
+
 };
