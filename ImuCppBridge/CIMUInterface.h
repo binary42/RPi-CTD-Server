@@ -39,6 +39,7 @@
 #include <stdio.h>
 #include <pthread.h>
 #include "RTIMULib.h"
+#include <memory>
 
 class CIMUInterface
 {
