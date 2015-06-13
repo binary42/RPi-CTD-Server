@@ -76,7 +76,7 @@ function handler( req, res )
 io.sockets.on('connection', function ( socket ) 
 {
 	// Interval for IMU reads - value in ms
-	var imuInterval = 25;
+	var imuInterval = 250;
 	var imuData;
 	
 	console.log('\nServer listening on localhost:8080\n\n');
@@ -88,6 +88,32 @@ io.sockets.on('connection', function ( socket )
 	// Send temperature reading out to connected clients
     pik.on( 'sensor', function( emitter, data )	
     {	
+		
+		// Calculate Temperature - index 4
+		if( data.index === 4 )
+		{
+			// Voltage and then scaled with / 10
+			data.value = ( ( 5.22 * data.value ) * ( 100 / 1024 ) ) / 10;
+			
+			// Conversion to degrees F
+			data.value *= ( 9.0 / 5.0 ) + 32.0;
+		}
+		// Calculate Pressure - index 5
+		if( data.index === 5 )
+		{
+			data.value = ( 250 * ( ( data.value / 1024 ) +0.04 );
+		} 
+		// Calculate Salinity - index 6
+		if( data.index === 6 )
+		{
+			data.value = ( 12.0 * data.value ) / 1024;
+		}
+		// Calculate Light - index 7
+		if( data.index === 7 )
+		{
+			
+		}
+		
 		socket.emit( 'values', {'id': data.index, 'value': data.value} );
 	});
 	
